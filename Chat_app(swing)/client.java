@@ -42,9 +42,10 @@ class gui
 class thread extends Thread
 {	
 	gui g;
-	char data;
+	char data;	
+	Socket s;
 	
-	Socket s;thread(char data,Socket s,gui g)
+	thread(char data,Socket s,gui g)
 	{
 		this.data = data;
 		this.s = s;
@@ -70,8 +71,7 @@ class thread extends Thread
 				else
 				{
 					String data_s = "";
-					String data_c = "";	
-					//System.out.println("client read");
+					String data_c = "";						
 					DataInputStream dr = new DataInputStream(s.getInputStream());
 					data_s+= dr.readUTF();
 					System.out.println(data_s);
@@ -96,8 +96,7 @@ class thread extends Thread
 				DataOutputStream dw;
 				dw = new DataOutputStream(s.getOutputStream());
 				if((g.jf.getText()).length()>0)
-				{
-					//System.out.println("empty message..");
+				{					
 					dw.writeUTF(g.jf.getText());
 					g.jf.setText("");
 				}	
